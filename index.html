@@ -22,6 +22,9 @@
             font-family: Lato;
             margin: 0;
             padding: 0;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         h1 {
@@ -45,6 +48,8 @@
         const componentId = 'react-render-title-component';
         let messages = {};
         window.componentId = componentId;
+        let copy = 'Sample Header!'
+        let helpText = 'This is a react component that only responds to events from the iron-autogrow-textarea sender. Type into the component below to update the title.';
         let receiveMessage = (event) => {
             console.log(`iframe ${window.componentId} recived message`);
             // if (event.origin == window.location.origin) { //We can't use this line...since this is a crossdomain file.
@@ -57,8 +62,8 @@
                         messages[event.data.sender][Date.now()] = event.data.body;
                         ReactDOM.render(
                             <div>
-                                <h1>{event.data.body}</h1>
-                                <h2>This is a react component that only responds to events from the iron-autogrow-textarea sender. Type into the component below to update the title.</h2>
+                                <h1>{event.data.body || copy }</h1>
+                                <h2>{helpText}</h2>
                             </div>,
                             document.getElementById('root')
                         );
@@ -80,11 +85,11 @@
             }, '*');
         };
         initComponentMessaging();
-    </script>
-    <script type="text/babel">
-            let copy = 'Sample Header!'
             ReactDOM.render(
-                <h1>{copy}</h1>,
+                <div>
+                    <h1 title='{event.data.body}'>{event.data.body}</h1>
+                    <h2 title='{helpText}'>{helpText}</h2>
+                </div>,
                 document.getElementById('root')
             );
         // window.parent.postMessage({
