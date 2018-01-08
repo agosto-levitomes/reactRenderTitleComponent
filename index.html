@@ -9,15 +9,28 @@
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
     <style>
-        h1 {
+        #root {
+            height: auto;
+            background: #52c7ff;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+        }
+        h1, h2 {
             font-family: Lato;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
             font-size: 53px;
             font-style: normal;
             font-variant: normal;
             font-weight: 900;
-            line-height: 106px;
-            text-align: center;
-            background: #52c7ff;
+
+        }
+        h2 {
+            font-weight: 100;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -40,6 +53,7 @@
                         messages[event.data.sender][Date.now()] = event.data.body;
                         ReactDOM.render(
                             <h1>{event.data.body}</h1>,
+                            <h2>This is a react component that only responds to events from the iron-autogrow-textarea sender. Type into the component below to update the title.<h2>,
                             document.getElementById('root')
                         );
                     }
