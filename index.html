@@ -17,26 +17,25 @@
         window.componentId = componentId;
         let receiveMessage = (event) => {
             console.log(`iframe ${window.componentId} recived message`);
-            if (event.origin == window.location.origin) {
-                if (event.data.sender) {
-                    if (event.data.registrationConfirmation) {
-                        console.log('Component registered successfully.');
-                    } else {
-                        if (event.data.body) {
-                            messages[event.data.sender] = messages[event.data.sender] || {};
-                            messages[event.data.sender][Date.now()] = event.data.body;
-                            ReactDOM.render(
-                                <h1>event.data.body || 'No data'</h1>,
-                                document.getElementById('root')
-                            );
-                        }
+            // if (event.origin == window.location.origin) { //We can't use this line...since this is a crossdomain file.
+            if (event.data.sender) {
+                if (event.data.registrationConfirmation) {
+                    console.log('Component registered successfully.');
+                } else {
+                    if (event.data.body) {
+                        messages[event.data.sender] = messages[event.data.sender] || {};
+                        messages[event.data.sender][Date.now()] = event.data.body;
+                        ReactDOM.render(
+                            <h1>event.data.body || 'No data'</h1>,
+                            document.getElementById('root')
+                        );
                     }
                 }
-                console.log('Event fired in iframe');
-                console.log(event.data);
-                
-                return;
             }
+            console.log('Event fired in iframe');
+            console.log(event.data);
+            return;
+            // }
         };
         let initComponentMessaging = () => {
             console.log(`Inside React Component`);
