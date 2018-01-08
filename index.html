@@ -7,7 +7,11 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
         document.addEventListener("DOMContentLoaded", function (event) {
             const componentId = 'react-render-title-component';
             let messages = {};
@@ -24,7 +28,7 @@
                                 messages[event.data.sender] = messages[event.data.sender] || {};
                                 messages[event.data.sender][Date.now()] = event.data.body;
                                 ReactDOM.render(
-                                    <h1>event.data.body</h1>,
+                                    <h1>event.data.body || 'No data'</h1>,
                                     document.getElementById('root')
                                 );
                             }
@@ -58,10 +62,6 @@
             }, '*');
         });
     </script>
-</head>
-
-<body>
-    <div id="root"></div>
     <script type="text/babel">
             let copy = 'Hello, world!'
             ReactDOM.render(
