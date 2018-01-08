@@ -62,8 +62,8 @@
                         messages[event.data.sender][Date.now()] = event.data.body;
                         ReactDOM.render(
                             <div>
-                                <h1 title='{event.data.body || copy}'>{ event.data.body || copy}</h1>
-                                <h2 title='{helpText}'>{helpText}</h2>
+                                <h1 title={event.data.body || copy}>{ event.data.body || copy}</h1>
+                                <h2 title={helpText}>{helpText}</h2>
                             </div>,
                             document.getElementById('root')
                         );
@@ -87,8 +87,8 @@
         initComponentMessaging();
             ReactDOM.render(
                 <div>
-                    <h1 title='{copy}'>{copy}</h1>
-                    <h2 title='{helpText}'>{helpText}</h2>
+                    <h1 title={copy}>{copy}</h1>
+                    <h2 title={helpText}>{helpText}</h2>
                 </div>,
                 document.getElementById('root')
             );
