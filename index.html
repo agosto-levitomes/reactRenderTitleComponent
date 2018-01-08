@@ -26,7 +26,7 @@
                         messages[event.data.sender] = messages[event.data.sender] || {};
                         messages[event.data.sender][Date.now()] = event.data.body;
                         ReactDOM.render(
-                            <h1>event.data.body</h1>,
+                            <h1>{event.data.body}</h1>,
                             document.getElementById('root')
                         );
                     }
