@@ -11,11 +11,13 @@
     <style>
         h1 {
             font-family: Lato;
-            font-size: 23px;
+            font-size: 53px;
             font-style: normal;
             font-variant: normal;
-            font-weight: 500;
-            line-height: 23px;
+            font-weight: 900;
+            line-height: 106px;
+            text-align: center;
+            background: #52c7ff;
         }
     </style>
 </head>
@@ -33,7 +35,7 @@
                 if (event.data.registrationConfirmation) {
                     console.log('Component registered successfully.');
                 } else {
-                    if (event.data.body) {
+                    if (event.data.body && event.data.sender === 'iron-autogrow-textarea') { //This component has a very specific data source it is expecting messages from.
                         messages[event.data.sender] = messages[event.data.sender] || {};
                         messages[event.data.sender][Date.now()] = event.data.body;
                         ReactDOM.render(
