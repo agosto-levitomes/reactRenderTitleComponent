@@ -17,7 +17,7 @@
             let messages = {};
             window.componentId = componentId;
             window.addEventListener("message", receiveMessage, false);
-            function receiveMessage(event) {
+            let receiveMessage = (event) => {
                 console.log('iframe ${elementTag} recived message');
                 if (event.origin == window.location.origin) {
                     if (event.data.sender) {
@@ -39,16 +39,10 @@
                     
                     return;
                 }
-            }
+            };
             let initComponentMessaging = () => {
                 console.log(`Inside React Component`);
                 window.addEventListener("message", receiveMessage, false);
-            };
-            let receiveMessage = (event) => {
-                if (event.origin == window.location.origin) {
-                    console.log(`Component Message: ${event.data}`);
-                    console.log(event);
-                }
             };
             initComponentMessaging();
             window.parent.postMessage({
