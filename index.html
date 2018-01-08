@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html>
+<!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8" />
@@ -12,27 +12,56 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        const componentId = 'react-render-title-component';
-        window.componentId = componentId;
-        ReactDOM.render(
-            <h1>Hello, world!</h1>,
-            document.getElementById('root')
-        );
-        let initComponentMessaging = () => {
-            console.log(`Inside React Component`);
+        document.addEventListener("DOMContentLoaded", function (event) {
+            const componentId = 'react-render-title-component';
+            let messages = {};
+            window.componentId = componentId;
             window.addEventListener("message", receiveMessage, false);
-        }
-        let receiveMessage => (event) {
-            if (event.origin == window.location.origin) {
-                console.log(`Component Message: ${event.data}`);
-                console.log(event);
+            function receiveMessage(event) {
+                console.log('iframe ${elementTag} recived message');
+                if (event.origin == window.location.origin) {
+                    if (event.data.sender) {
+                        if (event.data.registrationConfirmation) {
+                            console.log('Componet registered successfully.');
+                        } else {
+                            if (event.data.body) {
+                                messages[event.data.sender] = messages[event.data.sender] || {};
+                                messages[event.data.sender][Date.now()] = event.data.body;
+                            }
+                        }
+                    }
+                    console.log('Event fired in iframe');
+                    console.log(event.data);
+                    
+                    return;
+                }
             }
-        }
-        initComponentMessaging();
-        window.parent.postMessage({
-            sender: window.componentId,
-            registration: true,
-        }, '*');
+            console.log(window.componentId);
+            window.parent.postMessage({
+                sender: window.componentId,
+                registration: true,
+            }, '*');
+            let copy = 'Hello, world!'
+            ReactDOM.render(
+                <h1>copy</h1>,
+                document.getElementById('root')
+            );
+            let initComponentMessaging = () => {
+                console.log(`Inside React Component`);
+                window.addEventListener("message", receiveMessage, false);
+            }
+            let receiveMessage => (event) {
+                if (event.origin == window.location.origin) {
+                    console.log(`Component Message: ${event.data}`);
+                    console.log(event);
+                }
+            }
+            initComponentMessaging();
+            window.parent.postMessage({
+                sender: window.componentId,
+                registration: true,
+            }, '*');
+        });
         // window.parent.postMessage({
         //     sender: window.componentId,
         //     payload: 'Some copy',
