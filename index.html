@@ -26,7 +26,7 @@
                         messages[event.data.sender] = messages[event.data.sender] || {};
                         messages[event.data.sender][Date.now()] = event.data.body;
                         ReactDOM.render(
-                            <h1>event.data.body || 'No data'</h1>,
+                            <h1>`${event.data.body || 'No data'}`</h1>,
                             document.getElementById('root')
                         );
                     }
@@ -40,8 +40,8 @@
         let initComponentMessaging = () => {
             console.log(`Inside React Component`);
             window.addEventListener("message", receiveMessage, false);
-            console.log(window.parent);
-            window.parent.postMessage({
+            console.log(parent);
+            parent.postMessage({
                 sender: window.componentId,
                 registration: true,
             }, '*');
@@ -54,7 +54,7 @@
                 <h1>copy</h1>,
                 document.getElementById('root')
             );
-        // window.parent.postMessage({
+        // parent.postMessage({
         //     sender: window.componentId,
         //     payload: 'Some copy',
         //     reciver: 'react-render-title-component'
