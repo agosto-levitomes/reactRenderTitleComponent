@@ -7,6 +7,17 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <style>
+        h1 {
+            font-family: Lato;
+            font-size: 23px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 23px;
+        }
+    </style>
 </head>
 
 <body>
@@ -49,9 +60,9 @@
         initComponentMessaging();
     </script>
     <script type="text/babel">
-            let copy = 'Hello, world!'
+            let copy = 'Sample Header!'
             ReactDOM.render(
-                <h1>copy</h1>,
+                <h1>{copy}</h1>,
                 document.getElementById('root')
             );
         // window.parent.postMessage({
