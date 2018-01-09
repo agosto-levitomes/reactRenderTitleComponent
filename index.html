@@ -28,7 +28,7 @@
         }
 
         h1 {
-            font-size: 53px;
+            font-size: 2em;
             font-style: normal;
             font-variant: normal;
             font-weight: 900;
@@ -37,7 +37,7 @@
 
         h2 {
             font-weight: 100;
-            font-size: 16px;
+            font-size: 1em;
         }
     </style>
 </head>
@@ -49,7 +49,7 @@
         let messages = {};
         window.componentId = componentId;
         let copy = 'Sample Header!'
-        let helpText = 'This is a react component that only responds to events from the iron-autogrow-textarea sender. Type into the component below to update the title.';
+        let helpText = 'This react component only responds to postMessage events from iron-autogrow-textarea sender.';
         let receiveMessage = (event) => {
             console.log(`iframe ${window.componentId} recived message`);
             // if (event.origin == window.location.origin) { //We can't use this line...since this is a crossdomain file.
